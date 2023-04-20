@@ -4,8 +4,6 @@ import './toggle-side-bar.css'
 const ToggleSideBar = () => {
   const togglerRef = useRef(null);
   const [isXNav, setIsXNav] = useState(false);
-  // const dispatch = useDispatch();
-  // const showUiNav = useSelector(state => state.navUi.navIsVisible)
 
   return (
     <div className="menu-icon-container">
@@ -14,7 +12,7 @@ const ToggleSideBar = () => {
         onClick={() => {
           togglerRef.current.classList.toggle("menu-clicked")
           setIsXNav(!isXNav);
-          // dispatch(navUiActions.toggle())
+          document.getElementById('side').classList.toggle('show-side');
         }}
       >
         <span className="fade-left first-part w-50"></span>

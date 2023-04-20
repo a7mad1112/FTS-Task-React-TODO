@@ -1,0 +1,91 @@
+aside {
+  width: 290px;
+  background-color: var(--sec-color, #eef2f6);
+  height: 100vh;
+  position: sticky;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  padding: 45px 20px;
+  transition-property: left;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+}
+
+@media (max-width: 767px) {
+  #side {
+    left: -290px;
+    position: fixed;
+    height: 100vh;
+    padding-top: 60px;
+  }
+}
+
+#side.show-side {
+  left: 0;
+}
+
+#side header h1 {
+  font-size: 2.2rem;
+  color: var(--black-color, #000);
+}
+
+
+
+aside ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+aside ul li {
+  width: 100%;
+}
+
+aside ul li a {
+  width: 100%;
+  text-transform: capitalize;
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+aside ul li a {
+  color: var(--black-color);
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+}
+aside ul li a i {
+  line-height: 100%;
+}
+aside ul li a.active {
+  background-color: var(--black-color);
+  color: #fff;
+}
+
+aside ul li a:hover:not(a.active) {
+  background-color: #171c2188;
+  color: #fff;
+}
+
+
+aside>ul li a::after {
+  content: attr(data-tasks-count);
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px 7px;
+  border-radius: 50%;
+  line-height: 14px;
+  font-size: 14px;
+}
+
+aside>ul li a.active::after {
+  color: var(--black-color);
+  background-color: var(--sec-color);
+}

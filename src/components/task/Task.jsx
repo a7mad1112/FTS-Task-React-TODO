@@ -7,6 +7,18 @@ import { AiFillDelete } from "react-icons/ai";
 const Task = ({ task, storeTasks }) => {
   const taskRef = useRef(false);
 
+  // function to check if the date is passed
+  const hasDatePassed = (dateString) => {
+    // create a Date object for the given date string
+    const date = new Date(dateString);
+
+    // create a Date object for the current date
+    const today = new Date();
+
+    // compare the two dates and return true if the given date has passed
+    return date < today;
+  };
+
   return (
     <div className="content-box" ref={taskRef}>
       <div
@@ -60,11 +72,14 @@ const Task = ({ task, storeTasks }) => {
         <p>Assignee: {task.assignee}</p>
         <p>Details: {task.details}</p>
         <p id="end-date" className="mt-1">
-          <label htmlFor={`task-date${task.id}`}>Date:</label>
-          <span id={`task-date-${task.id}`}>{task.date}</span>
+          <label htmlFor={`task-date${task.id}`}>Date: </label>
+          <span className={`${hasDatePassed(task.date) && "time-limit"}`}>
+            &nbsp;
+            {task.date}
+          </span>
         </p>
         <p className="is-done text-end">
-          <label htmlFor={`task-isComplete-${task.id}`}>Complete: </label>
+          <label htmlFor={`task-isComplete-${task.id}`}>Complete: &nbsp;</label>
           <input
             type="checkbox"
             id={`task-isComplete-${task.id}`}

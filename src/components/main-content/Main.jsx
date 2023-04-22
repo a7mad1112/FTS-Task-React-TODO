@@ -49,11 +49,15 @@ const Main = () => {
         {tasks
           .filter((t) => t.isComplete)
           .map((t) => (
-            <Task key={t.id} task={t} storeTasks={storeTasks}  />
+            <Task key={t.id} task={t} storeTasks={storeTasks} />
           ))}
       </div>
 
-      <AddTaskForm isShow={showAddTaskForm} closeForm={setShowAddTaskForm} />
+      <AddTaskForm
+        isShow={showAddTaskForm}
+        closeForm={setShowAddTaskForm}
+        storeTasks={storeTasks}
+      />
     </section>
   );
 };

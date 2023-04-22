@@ -19,8 +19,24 @@ const Task = ({ task, storeTasks }) => {
             }}
           ></label>
           <input
-            value={task.title}
-            onChange={() => console.log("Here")}
+            placeholder={task.title}
+            onBlur={(ev) => {
+              ev.target.value = "";
+            }}
+            onFocus={(ev) => {
+              ev.target.value = task.title;
+              ev.target.select();
+            }}
+            onChange={(ev) => {
+              if (ev.target.value?.trim() && !parseInt(ev.target.value.at(0))) {
+                // task.title = ev.target.value;
+                const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
+                tasks.forEach((t) => {
+                  if (t.id === task.id) t.title = ev.target.value;
+                });
+                storeTasks(tasks);
+              }
+            }}
             aria-label="text"
             data-task-id={task.id}
           />

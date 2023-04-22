@@ -5,11 +5,11 @@ import { FaRegWindowClose } from "react-icons/fa";
 // function to generate infinite unique ID's
 // import { generateUniqueNumbers } from '../../uniqueNumbers';
 
-const AddTaskForm = ({isShow, closeForm}) => {
+const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
   // const IDs = generateUniqueNumbers;
   const modal = useRef();
   const closeModal = () => {
-    closeForm(false)
+    closeForm(false);
   };
 
   const [inputsValue, setInputsValue] = useState({
@@ -36,7 +36,7 @@ const AddTaskForm = ({isShow, closeForm}) => {
         isComplete: false,
         ...inputsValue,
       };
-      localStorage.setItem("tasks", JSON.stringify([newTask, ...tasks]));
+      storeTasks([newTask, ...tasks]);
       closeModal();
     }
   };
@@ -60,7 +60,7 @@ const AddTaskForm = ({isShow, closeForm}) => {
     <div
       id="add-task-form"
       ref={modal}
-      className={`my-modal ${isShow && 'show-modal'}`}
+      className={`my-modal ${isShow && "show-modal"}`}
       onClick={(e) => {
         if (e.currentTarget === e.target) closeModal();
       }}

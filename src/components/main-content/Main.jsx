@@ -13,13 +13,22 @@ const Main = () => {
     setTasks(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   };
+
+  const handleSearch = (ev) => {
+    const value = ev.target.value?.trim();
+    const temp = JSON.parse(localStorage.getItem("tasks")) ?? [];
+
+    setTasks(
+      temp.filter((t) => t.title.toLowerCase().includes(value.toLowerCase()))
+    );
+  };
   return (
     <section id="main-content" className="p-5 w-100">
       <header className="mb-3 d-flex align-items-center justify-content-between">
         <h2 className="fs-3">Home</h2>
         <label htmlFor="search">
           <span>Search: </span>
-          <input type="search" id="search" />
+          <input type="search" id="search" onChange={handleSearch} />
         </label>
       </header>
       <div className="tasks-container w-100">

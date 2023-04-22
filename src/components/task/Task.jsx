@@ -1,6 +1,8 @@
 import React from "react";
 import { useRef } from "react";
 import "./task.css";
+import { FaRegEdit } from "react-icons/fa";
+import { AiFillDelete } from "react-icons/ai";
 
 const Task = ({ task, storeTasks }) => {
   const taskRef = useRef(false);
@@ -43,10 +45,14 @@ const Task = ({ task, storeTasks }) => {
         </div>
         <div className="task-actions">
           <span id="edit-task-btn">
-            <i className="fa-solid fa-pen"></i>
+            <i>
+              <FaRegEdit />
+            </i>
           </span>
           <span id="delete-task-btn" role="button" aria-label="Delete task">
-            <i className="fa-solid fa-trash"></i>
+            <i>
+              <AiFillDelete />
+            </i>
           </span>
         </div>
       </div>

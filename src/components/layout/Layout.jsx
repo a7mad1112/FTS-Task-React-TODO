@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, SideBar, Main, AddTaskForm } from "../";
+import { Header, SideBar, Main } from "../";
 const Layout = () => {
   return (
     <React.Fragment>
@@ -7,7 +7,6 @@ const Layout = () => {
       <main className="d-flex">
         <SideBar />
         <Main />
-        <AddTaskForm />
       </main>
     </React.Fragment>
   );

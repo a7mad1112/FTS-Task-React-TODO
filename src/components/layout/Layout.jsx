@@ -1,11 +1,12 @@
 import React from "react";
-import { Header, SideBar } from "../";
+import { Header, SideBar, Main } from "../";
 const Layout = () => {
   return (
     <React.Fragment>
       <Header />
-      <main>
+      <main className="d-flex">
         <SideBar />
+        <Main />
       </main>
     </React.Fragment>
   );

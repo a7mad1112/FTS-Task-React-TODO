@@ -8,7 +8,7 @@ const SideBar = () => {
   return (
     <aside id="side">
       <header className="d-flex  justify-content-between align-items-center mb-4">
-        <h1 className="fw-bolder text-uppercase">todo</h1>
+        <h1 className="text-uppercase">todo</h1>
         <span className="scale-action logo">
           <BsGithub />
         </span>

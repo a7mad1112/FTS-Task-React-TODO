@@ -1,8 +1,8 @@
 import React from "react";
 import { useRef } from "react";
-import './task.css'
+import "./task.css";
 
-const Task = ({ task }) => {
+const Task = ({ task, storeTasks }) => {
   const taskRef = useRef(false);
 
   return (
@@ -12,10 +12,11 @@ const Task = ({ task }) => {
         aria-label="task"
       >
         <div className="label">
-          <label htmlFor={`task-title-${task.id}`}
-          onClick={() => {
-            taskRef.current.classList.toggle('active')
-          }}
+          <label
+            htmlFor={`task-title-${task.id}`}
+            onClick={() => {
+              taskRef.current.classList.toggle("active");
+            }}
           ></label>
           <input
             value={task.title}
@@ -47,7 +48,15 @@ const Task = ({ task }) => {
             id={`task-isComplete-${task.id}`}
             name="isComplete"
             checked={task.isComplete}
-            onChange={() => console.log("Here")}
+            onChange={() => {
+              const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
+              tasks.forEach((t) => {
+                if (t.id === task.id) {
+                  t.isComplete = !t.isComplete;
+                }
+              });
+              storeTasks(tasks);
+            }}
           />
         </p>
       </div>

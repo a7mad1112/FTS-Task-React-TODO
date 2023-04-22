@@ -6,8 +6,13 @@ import AddTaskForm from "../add-task-form/AddTaskForm";
 
 const Main = () => {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
-
-  const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) ?? []
+  );
+  const storeTasks = (tasks) => {
+    setTasks(tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  };
   return (
     <section id="main-content" className="p-5 w-100">
       <header className="mb-3 d-flex align-items-center justify-content-between">
@@ -35,7 +40,7 @@ const Main = () => {
           ) : (
             tasks
               .filter((t) => !t.isComplete)
-              .map((t) => <Task key={t.id} task={t} />)
+              .map((t) => <Task key={t.id} task={t} storeTasks={storeTasks} />)
           )}
         </div>
       </div>
@@ -44,7 +49,7 @@ const Main = () => {
         {tasks
           .filter((t) => t.isComplete)
           .map((t) => (
-            <Task key={t.id} task={t} />
+            <Task key={t.id} task={t} storeTasks={storeTasks}  />
           ))}
       </div>
 

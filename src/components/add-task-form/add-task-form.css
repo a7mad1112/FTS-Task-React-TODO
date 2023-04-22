@@ -84,7 +84,8 @@
   margin-bottom: 2px !important;
 }
 
-label[for="task-name"]::after {
+label[for="task-name"]::after,
+label[for="task-assignee"]::after {
   content: '*';
   color: var(--high-priority);
   position: absolute;

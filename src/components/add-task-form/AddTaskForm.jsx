@@ -2,40 +2,87 @@ import React, { useRef, useState } from "react";
 import "./add-task-form.css";
 import { FaRegWindowClose } from "react-icons/fa";
 
+// function to generate infinite unique ID's
+// import { generateUniqueNumbers } from '../../uniqueNumbers';
+
 const AddTaskForm = () => {
+  // const IDs = generateUniqueNumbers;
+  const modal = useRef();
+  const closeModal = () => {
+    modal.current.classList.remove("show-modal");
+  };
+
   const [inputsValue, setInputsValue] = useState({
     title: "",
     assignee: "",
     details: "",
     priority: "",
-    id: Math.random() * 10,
     date: "",
-    isComplete: false,
   });
 
   const form = useRef();
-  const [inputsErr, setInputsErr] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-
   const handleChange = (ev) => {
     const { name, value } = ev.target;
-    console.log(inputsValue);
     setInputsValue({ ...inputsValue, [name]: value });
-    console.log(inputsValue);
+  };
+
+  const handleSubmit = (eve) => {
+    eve.preventDefault();
+    if (Object.keys(validate(inputsValue)).length === 0) {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
+      const newTask = {
+        // id: IDs().next().value,
+        id: Math.random(),
+        isComplete: false,
+        ...inputsValue,
+      };
+      localStorage.setItem("tasks", JSON.stringify([newTask, ...tasks]));
+      closeModal();
+    }
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.title.trim()) {
+      errors.title = "Title name is required!";
+    } else if (parseInt(values.title.trim()?.at(0))) {
+      errors.title = "This is not a valid task name!";
+    }
+
+    if (!values.assignee.trim()) errors.assignee = "Assignee is required!";
+    else if (parseInt(values.assignee.trim()?.at(0)))
+      errors.assignee = "This is not a valid Assignee!";
+
+    return errors;
   };
 
   return (
-    <div id="add-task-form" className="my-modal show-modal">
+    <div
+      id="add-task-form"
+      ref={modal}
+      className="my-modal "
+      onClick={(e) => {
+        if (e.currentTarget === e.target) closeModal();
+      }}
+    >
       <div className="my-modal-content rounded">
         <header className="py-4 px-3 rounded-top d-flex align-items-center justify-content-between">
           <h3>New Task</h3>
-          <span className="close-add-task-form close-task-form">
+          <span
+            className="close-add-task-form close-task-form"
+            onClick={closeModal}
+          >
             <i>
               <FaRegWindowClose />
             </i>
           </span>
         </header>
-        <form className="p-3" id="add-task-modal" ref={form}>
+        <form
+          onSubmit={handleSubmit}
+          className="p-3"
+          id="add-task-modal"
+          ref={form}
+        >
           <div className="form-group mb-2">
             <label className="d-block" htmlFor="task-name">
               Title
@@ -47,7 +94,7 @@ const AddTaskForm = () => {
               type="text"
               id="task-name"
             />
-            <p className="title-err"></p>
+            <p className="title-err">{validate(inputsValue)?.title}</p>
           </div>
 
           <div className="form-group mb-2">
@@ -61,6 +108,7 @@ const AddTaskForm = () => {
               type="text"
               id="task-assignee"
             />
+            <p className="title-err">{validate(inputsValue)?.assignee}</p>
           </div>
 
           <div className="form-group mb-2">
@@ -93,10 +141,13 @@ const AddTaskForm = () => {
                 </select>
               </div>
               <div className="col p-0">
-                <label htmlFor="due-date">
-                  Due Date
-                </label>
-                <input onChange={handleChange} name="date" type="date" id="due-date" />
+                <label htmlFor="due-date">Due Date</label>
+                <input
+                  onChange={handleChange}
+                  name="date"
+                  type="date"
+                  id="due-date"
+                />
               </div>
             </div>
           </div>

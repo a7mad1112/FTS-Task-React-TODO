@@ -23,7 +23,8 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
   const form = useRef();
   const handleChange = (ev) => {
     const { name, value } = ev.target;
-    setInputsValue({ ...inputsValue, [name]: value });
+    setInputsValue((prevInputsValue) => ({ ...prevInputsValue, [name]: value }));
+    setInputsErrors(validate({ ...inputsValue, [name]: value }));
   };
 
   const handleSubmit = (eve) => {
@@ -32,7 +33,7 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
       const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
       const newTask = {
         // id: IDs().next().value,
-        id: Math.random(),
+        id: Math.random() * 100,
         isComplete: false,
         ...inputsValue,
       };
@@ -55,6 +56,12 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
 
     return errors;
   };
+
+  const [inputsErrors, setInputsErrors] = useState({
+    x: "no errors in initial value, this key in initial value only for the length of kays be not zero",
+  });
+
+
 
   return (
     <div
@@ -94,7 +101,7 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
               type="text"
               id="task-name"
             />
-            <p className="title-err">{validate(inputsValue)?.title}</p>
+            <p className="title-err">{inputsErrors?.title}</p>
           </div>
 
           <div className="form-group mb-2">
@@ -108,7 +115,7 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
               type="text"
               id="task-assignee"
             />
-            <p className="title-err">{validate(inputsValue)?.assignee}</p>
+            <p className="title-err">{inputsErrors?.assignee}</p>
           </div>
 
           <div className="form-group mb-2">

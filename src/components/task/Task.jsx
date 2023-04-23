@@ -4,7 +4,12 @@ import "./task.css";
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 
-const Task = ({ task, storeTasks, showEditTaskAndSetTaskToEdit }) => {
+const Task = ({
+  task,
+  storeTasks,
+  showEditTaskAndSetTaskToEdit,
+  showDeleteTaskAndSetTaskToDelete,
+}) => {
   const taskRef = useRef(false);
 
   // function to check if the date is passed
@@ -70,7 +75,12 @@ const Task = ({ task, storeTasks, showEditTaskAndSetTaskToEdit }) => {
               <FaRegEdit />
             </i>
           </span>
-          <span id="delete-task-btn" role="button" aria-label="Delete task">
+          <span
+            id="delete-task-btn"
+            role="button"
+            aria-label="Delete task"
+            onClick={() => showDeleteTaskAndSetTaskToDelete(task)}
+          >
             <i>
               <AiFillDelete />
             </i>

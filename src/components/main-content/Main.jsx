@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import RelaxImg from "../relax-img/RelaxImg";
 import Task from "../task/Task";
 import "./main.css";
-import AddTaskForm from "../add-task-form/AddTaskForm";
-import EditTaskForm from "../edit-task-form/EditTaskForm";
+import { DeleteTask, EditTaskForm, AddTaskForm } from "../index";
 
 const Main = () => {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const [showEditTaskForm, setShowEditTaskForm] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [taskToDelete, setTaskToDelete] = useState({});
   const [taskToEdit, setTaskToEdit] = useState({});
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) ?? []
@@ -29,6 +31,11 @@ const Main = () => {
   const showEditTaskAndSetTaskToEdit = (task) => {
     setShowEditTaskForm(true);
     setTaskToEdit(task);
+  };
+
+  const showDeleteTaskAndSetTaskToDelete = (task) => {
+    setShowDeleteModal(true);
+    setTaskToDelete(task);
   };
 
   return (
@@ -60,6 +67,7 @@ const Main = () => {
               .filter((t) => !t.isComplete)
               .map((t) => (
                 <Task
+                showDeleteTaskAndSetTaskToDelete={showDeleteTaskAndSetTaskToDelete}
                   key={t.id}
                   task={t}
                   showEditTaskAndSetTaskToEdit={showEditTaskAndSetTaskToEdit}
@@ -75,6 +83,7 @@ const Main = () => {
           .filter((t) => t.isComplete)
           .map((t) => (
             <Task
+            showDeleteTaskAndSetTaskToDelete={showDeleteTaskAndSetTaskToDelete}
               key={t.id}
               task={t}
               showEditTaskAndSetTaskToEdit={showEditTaskAndSetTaskToEdit}
@@ -94,6 +103,13 @@ const Main = () => {
         setShowEditTaskForm={setShowEditTaskForm}
         storeTasks={storeTasks}
         taskToEdit={taskToEdit}
+      />
+
+      <DeleteTask
+        isShow={showDeleteModal}
+        setShowDeleteModal={setShowDeleteModal}
+        storeTasks={storeTasks}
+        taskToDelete={taskToDelete}
       />
     </section>
   );

@@ -94,7 +94,7 @@ const EditTaskForm = ({
               type="text"
               id="task-name"
             />
-            {/* <p className="title-err">{validate(inputsValue)?.title}</p> */}
+            <p className="title-err">{validate(inputsValue)?.title}</p>
           </div>
 
           <div className="form-group mb-2">
@@ -112,7 +112,7 @@ const EditTaskForm = ({
               type="text"
               id="task-assignee"
             />
-            {/* <p className="title-err">{validate(inputsValue)?.assignee}</p> */}
+            <p className="title-err">{validate(inputsValue)?.assignee}</p>
           </div>
 
           <div className="form-group mb-2">

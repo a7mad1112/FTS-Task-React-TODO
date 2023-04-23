@@ -9,6 +9,7 @@ const Task = ({
   storeTasks,
   showEditTaskAndSetTaskToEdit,
   showDeleteTaskAndSetTaskToDelete,
+  setCurrentTasks,
 }) => {
   const taskRef = useRef(false);
 
@@ -58,6 +59,7 @@ const Task = ({
                   if (t.id === task.id) t.title = ev.target.value;
                 });
                 storeTasks(tasks);
+                setCurrentTasks();
               }
             }}
             aria-label="text"
@@ -105,13 +107,16 @@ const Task = ({
             name="isComplete"
             checked={task.isComplete}
             onChange={() => {
+              // update on local storage:
               const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
               tasks.forEach((t) => {
                 if (t.id === task.id) {
                   t.isComplete = !t.isComplete;
                 }
               });
-              storeTasks(tasks);
+              localStorage.setItem("tasks", JSON.stringify(tasks));
+
+              setCurrentTasks();
             }}
           />
         </p>

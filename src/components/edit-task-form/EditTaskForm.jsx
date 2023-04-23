@@ -4,7 +4,7 @@ import { FaRegWindowClose } from "react-icons/fa";
 const EditTaskForm = ({
   isShow,
   setShowEditTaskForm,
-  storeTasks,
+  setCurrentTasks,
   taskToEdit,
 }) => {
   const closeModal = () => {
@@ -45,6 +45,7 @@ const EditTaskForm = ({
   const handleSubmit = (eve) => {
     eve.preventDefault();
     if (Object.keys(validate(inputsValue)).length === 0) {
+      // edit in local storage:
       const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
       tasks.forEach((t, i) => {
         if (t.id === taskToEdit.id)
@@ -53,7 +54,9 @@ const EditTaskForm = ({
             ...inputsValue,
           };
       });
-      storeTasks(tasks);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+
+      setCurrentTasks()
       closeModal();
     }
   };

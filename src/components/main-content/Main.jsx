@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RelaxImg from "../relax-img/RelaxImg";
 import Task from "../task/Task";
 import "./main.css";
 import { DeleteTask, EditTaskForm, AddTaskForm } from "../index";
-
+import { Route, Routes, useLocation } from "react-router-dom";
+import {
+  getTasksForCurrentDay,
+  getTasksForNextSevenDays,
+} from "../tasksFilters";
+// useLocation is a hook to get information about the current URL location.
 const Main = () => {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const [showEditTaskForm, setShowEditTaskForm] = useState(false);
@@ -15,7 +20,6 @@ const Main = () => {
     JSON.parse(localStorage.getItem("tasks")) ?? []
   );
   const storeTasks = (tasks) => {
-    setTasks(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   };
 
@@ -38,27 +42,60 @@ const Main = () => {
     setTaskToDelete(task);
   };
 
+  // const location = useLocation();
+  const location = useLocation();
+
+  const [path, setPath] = useState(location.pathname);
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location.pathname]);
+
+  const setCurrentTasks = () => {
+    if (path === "/") {
+      setTasks(JSON.parse(localStorage.getItem("tasks")) ?? []);
+    } else if (path === "/today") {
+      setTasks(
+        getTasksForCurrentDay(JSON.parse(localStorage.getItem("tasks")))
+      );
+    } else if (path === "/week") {
+      setTasks(
+        getTasksForNextSevenDays(JSON.parse(localStorage.getItem("tasks")))
+      );
+    }
+  };
+
+  useEffect(() => {
+    setCurrentTasks();
+  }, [path]);
+
   return (
     <section id="main-content" className="p-5 w-100">
       <header className="mb-3 d-flex align-items-center justify-content-between">
-        <h2 className="fs-3">Home</h2>
+        <h2 className="fs-3">{path?.slice(1) || "Home"}</h2>
         <label htmlFor="search">
           <span>Search: </span>
           <input type="search" id="search" onChange={handleSearch} />
         </label>
       </header>
       <div className="tasks-container w-100">
-        <div
-          className="add-task w-100 rounded"
-          onClick={() => {
-            setShowAddTaskForm(true);
-          }}
-        >
-          <button className="w-100 rounded">
-            <i className="fa-solid fa-plus add-project"></i>
-            <span>Add new task</span>
-          </button>
-        </div>
+        <Routes>
+          <Route
+            path="/"
+            element=<div
+              className="add-task w-100 rounded"
+              onClick={() => {
+                setShowAddTaskForm(true);
+              }}
+            >
+              <button className="w-100 rounded">
+                <i className="fa-solid fa-plus add-project"></i>
+                <span>Add new task</span>
+              </button>
+            </div>
+          />
+        </Routes>
+
         <div className="my-accordion">
           {tasks.length === 0 ? (
             <RelaxImg />
@@ -67,11 +104,14 @@ const Main = () => {
               .filter((t) => !t.isComplete)
               .map((t) => (
                 <Task
-                showDeleteTaskAndSetTaskToDelete={showDeleteTaskAndSetTaskToDelete}
+                  showDeleteTaskAndSetTaskToDelete={
+                    showDeleteTaskAndSetTaskToDelete
+                  }
                   key={t.id}
                   task={t}
                   showEditTaskAndSetTaskToEdit={showEditTaskAndSetTaskToEdit}
                   storeTasks={storeTasks}
+                  setCurrentTasks={setCurrentTasks}
                 />
               ))
           )}
@@ -83,11 +123,14 @@ const Main = () => {
           .filter((t) => t.isComplete)
           .map((t) => (
             <Task
-            showDeleteTaskAndSetTaskToDelete={showDeleteTaskAndSetTaskToDelete}
+              showDeleteTaskAndSetTaskToDelete={
+                showDeleteTaskAndSetTaskToDelete
+              }
               key={t.id}
               task={t}
               showEditTaskAndSetTaskToEdit={showEditTaskAndSetTaskToEdit}
               storeTasks={storeTasks}
+              setCurrentTasks={setCurrentTasks}
             />
           ))}
       </div>
@@ -101,14 +144,14 @@ const Main = () => {
       <EditTaskForm
         isShow={showEditTaskForm}
         setShowEditTaskForm={setShowEditTaskForm}
-        storeTasks={storeTasks}
+        setCurrentTasks={setCurrentTasks}
         taskToEdit={taskToEdit}
       />
 
       <DeleteTask
         isShow={showDeleteModal}
         setShowDeleteModal={setShowDeleteModal}
-        storeTasks={storeTasks}
+        setCurrentTasks={setCurrentTasks}
         taskToDelete={taskToDelete}
       />
     </section>

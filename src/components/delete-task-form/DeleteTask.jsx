@@ -2,12 +2,19 @@ import React from "react";
 import "./delete-task.css";
 import { FaRegWindowClose } from "react-icons/fa";
 
-const DeleteTask = ({ isShow, setShowDeleteModal, taskToDelete, storeTasks }) => {
+const DeleteTask = ({ isShow, setShowDeleteModal, taskToDelete, setCurrentTasks }) => {
   const handleDelete = () => {
-    const tasks = [...(JSON.parse(localStorage.getItem("tasks")) ?? [])].filter(
-      (t) => t.id !== taskToDelete.id
+    // delete from local storage
+    localStorage.setItem(
+      "tasks",
+      JSON.stringify(
+        [...JSON.parse(localStorage.getItem("tasks"))].filter(
+          (t) => t.id !== taskToDelete.id
+        )
+      )
     );
-    storeTasks(tasks)
+
+    setCurrentTasks();
     setShowDeleteModal(false);
   };
   return (

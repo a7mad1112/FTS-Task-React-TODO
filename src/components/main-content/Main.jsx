@@ -3,9 +3,12 @@ import RelaxImg from "../relax-img/RelaxImg";
 import Task from "../task/Task";
 import "./main.css";
 import AddTaskForm from "../add-task-form/AddTaskForm";
+import EditTaskForm from "../edit-task-form/EditTaskForm";
 
 const Main = () => {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+  const [showEditTaskForm, setShowEditTaskForm] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState({});
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) ?? []
   );
@@ -22,6 +25,12 @@ const Main = () => {
       temp.filter((t) => t.title.toLowerCase().includes(value.toLowerCase()))
     );
   };
+
+  const showEditTaskAndSetTaskToEdit = (task) => {
+    setShowEditTaskForm(true);
+    setTaskToEdit(task);
+  };
+
   return (
     <section id="main-content" className="p-5 w-100">
       <header className="mb-3 d-flex align-items-center justify-content-between">
@@ -49,7 +58,14 @@ const Main = () => {
           ) : (
             tasks
               .filter((t) => !t.isComplete)
-              .map((t) => <Task key={t.id} task={t} storeTasks={storeTasks} />)
+              .map((t) => (
+                <Task
+                  key={t.id}
+                  task={t}
+                  showEditTaskAndSetTaskToEdit={showEditTaskAndSetTaskToEdit}
+                  storeTasks={storeTasks}
+                />
+              ))
           )}
         </div>
       </div>
@@ -58,7 +74,12 @@ const Main = () => {
         {tasks
           .filter((t) => t.isComplete)
           .map((t) => (
-            <Task key={t.id} task={t} storeTasks={storeTasks} />
+            <Task
+              key={t.id}
+              task={t}
+              showEditTaskAndSetTaskToEdit={showEditTaskAndSetTaskToEdit}
+              storeTasks={storeTasks}
+            />
           ))}
       </div>
 
@@ -66,6 +87,13 @@ const Main = () => {
         isShow={showAddTaskForm}
         closeForm={setShowAddTaskForm}
         storeTasks={storeTasks}
+      />
+
+      <EditTaskForm
+        isShow={showEditTaskForm}
+        setShowEditTaskForm={setShowEditTaskForm}
+        storeTasks={storeTasks}
+        taskToEdit={taskToEdit}
       />
     </section>
   );

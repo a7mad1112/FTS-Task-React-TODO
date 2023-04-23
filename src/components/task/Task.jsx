@@ -34,6 +34,10 @@ const Task = ({ task, storeTasks }) => {
           ></label>
           <input
             placeholder={task.title}
+            onKeyDown={({ key, target }) => {
+              // Trigger onBlur event
+              if (key === "Enter" || key === "Escape") target.blur();
+            }}
             onBlur={(ev) => {
               ev.target.value = "";
             }}

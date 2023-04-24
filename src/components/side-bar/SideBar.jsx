@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsGithub } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./side-bar.css";
 import { FaHome, FaCalendarAlt } from "react-icons/fa";
 
 const SideBar = () => {
+
+  const location = useLocation();
+
+  const [path, setPath] = useState(location.pathname);
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location.pathname]);
+
   return (
     <aside id="side">
       <header className="d-flex  justify-content-between align-items-center mb-4">
@@ -16,7 +25,7 @@ const SideBar = () => {
 
       <ul className="p-0">
         <li>
-          <Link to={"/"} className="active">
+          <Link to={"/"} className={`${path === '/' && "active"}`}>
             <i className="fs-5">
               <FaHome />
             </i>
@@ -25,7 +34,7 @@ const SideBar = () => {
         </li>
 
         <li>
-          <Link to={"/today"}>
+          <Link to={"/today"} className={`${path === '/today' && "active"}`}>
             <i>
               <FaCalendarAlt />
             </i>
@@ -34,7 +43,7 @@ const SideBar = () => {
         </li>
 
         <li>
-          <Link to={"/week"}>
+          <Link to={"/week"} className={`${path === '/week' && "active"}`}>
             <i>
               <FaCalendarAlt />
             </i>

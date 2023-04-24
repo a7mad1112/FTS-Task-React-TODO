@@ -25,10 +25,8 @@ const Main = () => {
 
   const handleSearch = (ev) => {
     const value = ev.target.value?.trim();
-    const temp = JSON.parse(localStorage.getItem("tasks")) ?? [];
-
-    setTasks(
-      temp.filter((t) => t.title.toLowerCase().includes(value.toLowerCase()))
+    setCurrentTasks();
+    setTasks( prev => prev.filter((t) => t.title.toLowerCase().includes(value.toLowerCase()))
     );
   };
 

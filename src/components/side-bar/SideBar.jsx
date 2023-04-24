@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BsGithub } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
 import "./side-bar.css";
-import { FaHome, FaCalendarAlt } from "react-icons/fa";
+import { FaHome, FaCalendarAlt, FaLightbulb, FaMoon } from "react-icons/fa";
 
 const SideBar = () => {
-
   const location = useLocation();
 
   const [path, setPath] = useState(location.pathname);
@@ -14,6 +13,19 @@ const SideBar = () => {
     setPath(location.pathname);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const value = localStorage.getItem("displayMode") || "";
+    if (value === "dark") document.body.classList.add("display-dark");
+  }, []);
+
+  const toggleDisplayMode = () => {
+    let value = localStorage.getItem("displayMode");
+    value = value === "light" ? "dark" : "light";
+    localStorage.setItem("displayMode", value);
+    value === "dark"
+      ? document.body.classList.add("display-dark")
+      : document.body.classList.remove("display-dark");
+  };
   return (
     <aside id="side">
       <header className="d-flex  justify-content-between align-items-center mb-4">
@@ -25,7 +37,7 @@ const SideBar = () => {
 
       <ul className="p-0">
         <li>
-          <Link to={"/"} className={`${path === '/' && "active"}`}>
+          <Link to={"/"} className={`${path === "/" && "active"}`}>
             <i className="fs-5">
               <FaHome />
             </i>
@@ -34,7 +46,7 @@ const SideBar = () => {
         </li>
 
         <li>
-          <Link to={"/today"} className={`${path === '/today' && "active"}`}>
+          <Link to={"/today"} className={`${path === "/today" && "active"}`}>
             <i>
               <FaCalendarAlt />
             </i>
@@ -43,7 +55,7 @@ const SideBar = () => {
         </li>
 
         <li>
-          <Link to={"/week"} className={`${path === '/week' && "active"}`}>
+          <Link to={"/week"} className={`${path === "/week" && "active"}`}>
             <i>
               <FaCalendarAlt />
             </i>
@@ -51,6 +63,22 @@ const SideBar = () => {
           </Link>
         </li>
       </ul>
+      <footer>
+        <hr />
+        <div id="display-mode" onClick={toggleDisplayMode}>
+          <span className="light-mode">
+            <i>
+              <FaLightbulb />
+            </i>
+          </span>
+          <span className="dark-mode">
+            <i>
+              <FaMoon />
+            </i>
+          </span>
+          <span className="ball"></span>
+        </div>
+      </footer>
     </aside>
   );
 };

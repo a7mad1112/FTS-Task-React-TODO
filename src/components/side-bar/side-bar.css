@@ -90,3 +90,52 @@ aside>ul li a.active::after {
   color: var(--black-color);
   background-color: var(--sec-color);
 }
+
+
+
+/* Display Mode Toggler */
+/* Light Mode */
+#display-mode {
+  padding: 45px 20px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  border-radius: 20px;
+  gap: 1rem;
+}
+
+#display-mode svg {
+  font-size: 24px;
+}
+
+#display-mode .light-mode {
+  color: var(--medium-priority);
+}
+
+#display-mode .dark-mode {
+  color: var(--black-color);
+}
+
+#display-mode .ball {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  left: 12px;
+  transition: 0.4s;
+  background-color: var(--black-color);
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.4s;
+  z-index: -1;
+}
+
+body.display-dark #display-mode .ball {
+  left: 50px;
+  background-color: var(--medium-priority);
+}
+
+/* End Mode Toggler */

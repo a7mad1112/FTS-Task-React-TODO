@@ -16,7 +16,7 @@ const SideBar = () => {
 
       <ul className="p-0">
         <li>
-          <Link to={"/"} className="active" data-tasks-count="3">
+          <Link to={"/"} className="active">
             <i className="fs-5">
               <FaHome />
             </i>
@@ -25,7 +25,7 @@ const SideBar = () => {
         </li>
 
         <li>
-          <Link to={"/today"} data-tasks-count="1">
+          <Link to={"/today"}>
             <i>
               <FaCalendarAlt />
             </i>
@@ -34,7 +34,7 @@ const SideBar = () => {
         </li>
 
         <li>
-          <Link to={"/week"} data-tasks-count="0">
+          <Link to={"/week"}>
             <i>
               <FaCalendarAlt />
             </i>

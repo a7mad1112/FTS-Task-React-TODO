@@ -134,7 +134,23 @@ const Main = () => {
             />
           ))}
       </div>
-
+      <hr className="mt-5" />
+      <table className="table table-striped table-hover mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Home</th>
+            <th scope="col">Today</th>
+            <th scope="col">Week</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{tasks.length}</td>
+            <td>{ getTasksForCurrentDay(tasks).length }</td>
+            <td>{ getTasksForNextSevenDays(tasks).length }</td>
+          </tr>
+        </tbody>
+      </table>
       <AddTaskForm
         setTasks={setTasks}
         isShow={showAddTaskForm}

@@ -83,7 +83,7 @@ const EditTaskForm = ({
         </header>
         <form className="p-3" id="add-task-modal" onSubmit={handleSubmit}>
           <div className="form-group mb-2">
-            <label className="d-block" htmlFor="task-name">
+            <label className="d-block" htmlFor="task-name1">
               Title
             </label>
             <input
@@ -95,13 +95,13 @@ const EditTaskForm = ({
               className="d-block"
               name="title"
               type="text"
-              id="task-name"
+              id="task-name1"
             />
             <p className="title-err">{validate(inputsValue)?.title}</p>
           </div>
 
           <div className="form-group mb-2">
-            <label className="d-block" htmlFor="task-assignee">
+            <label className="d-block" htmlFor="task-assignee2">
               Assignee
             </label>
             <input
@@ -113,13 +113,13 @@ const EditTaskForm = ({
               className="d-block"
               name="assignee"
               type="text"
-              id="task-assignee"
+              id="task-assignee2"
             />
             <p className="title-err">{validate(inputsValue)?.assignee}</p>
           </div>
 
           <div className="form-group mb-2">
-            <label className="d-block" htmlFor="task-details">
+            <label className="d-block" htmlFor="task-details2">
               Details (notes)
             </label>
             <textarea
@@ -128,14 +128,14 @@ const EditTaskForm = ({
               }}
               onChange={handleChange}
               value={inputsValue.details ?? ""}
-              id="task-details"
+              id="task-details2"
               name="details"
             ></textarea>
           </div>
           <div className="form-group mb-2">
             <div className="row gap-3">
               <div className="col p-0">
-                <label htmlFor="select-priority" data-color="">
+                <label htmlFor="select-priority2" data-color="">
                   Priority
                 </label>
                 <select
@@ -143,7 +143,7 @@ const EditTaskForm = ({
                   value={inputsValue.priority ?? "none"}
                   className="d-block"
                   name="priority"
-                  id="select-priority"
+                  id="select-priority2"
                 >
                   <option value="none">None</option>
                   <option value="low">Low</option>
@@ -152,13 +152,13 @@ const EditTaskForm = ({
                 </select>
               </div>
               <div className="col p-0">
-                <label htmlFor="due-date">Due Date</label>
+                <label htmlFor="due-date2">Due Date</label>
                 <input
                   onChange={handleChange}
                   value={inputsValue.date ?? ""}
                   name="date"
                   type="date"
-                  id="due-date"
+                  id="due-date2"
                 />
               </div>
             </div>

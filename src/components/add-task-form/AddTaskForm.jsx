@@ -1,16 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./add-task-form.css";
 import { FaRegWindowClose } from "react-icons/fa";
 
 // function to generate infinite unique ID's
 // import { generateUniqueNumbers } from '../../uniqueNumbers';
 
-const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
+const AddTaskForm = ({ isShow, closeForm, storeTasks, setTasks }) => {
   // const IDs = generateUniqueNumbers;
   const modal = useRef();
   const closeModal = () => {
     closeForm(false);
   };
+  const form = useRef();
+
+  useEffect(() => {
+    // Access the form DOM node
+    const formNode = form.current;
+
+    // Select all input, select, and textarea elements
+    const formInputs = formNode.querySelectorAll("input, select, textarea");
+
+    // Set the value of each element to an empty string
+    formInputs.forEach((input) => {
+      input.value = "";
+    });
+  }, [isShow]);
 
   const [inputsValue, setInputsValue] = useState({
     title: "",
@@ -20,10 +34,12 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
     date: "",
   });
 
-  const form = useRef();
   const handleChange = (ev) => {
     const { name, value } = ev.target;
-    setInputsValue((prevInputsValue) => ({ ...prevInputsValue, [name]: value }));
+    setInputsValue((prevInputsValue) => ({
+      ...prevInputsValue,
+      [name]: value,
+    }));
     setInputsErrors(validate({ ...inputsValue, [name]: value }));
   };
 
@@ -38,6 +54,7 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
         ...inputsValue,
       };
       storeTasks([newTask, ...tasks]);
+      setTasks([newTask, ...tasks]);
       closeModal();
     }
   };
@@ -60,8 +77,6 @@ const AddTaskForm = ({ isShow, closeForm, storeTasks }) => {
   const [inputsErrors, setInputsErrors] = useState({
     x: "no errors in initial value, this key in initial value only for the length of kays be not zero",
   });
-
-
 
   return (
     <div

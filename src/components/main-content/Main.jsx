@@ -136,6 +136,7 @@ const Main = () => {
       </div>
 
       <AddTaskForm
+        setTasks={setTasks}
         isShow={showAddTaskForm}
         closeForm={setShowAddTaskForm}
         storeTasks={storeTasks}

@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# FTS-Task-React-TODO
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FTS-Task-To-Do is a simple and user-friendly website that provides users with a convenient way to manage their to-do list. 
+Built with React, this website allows users to add, delete, and edit tasks easily.
 
-## Available Scripts
+## Features
+FTS-Task-To-Do comes with several helpful features, including:
+- ### Accessibility
+  FTS-Task-To-Do is designed with web accessibility guidelines and best practices in mind, making it accessible to users with disabilities.
 
-In the project directory, you can run:
+- ### SEO Optimization
+  The website is optimized for search engines using various techniques to enhance its visibility and ranking on search engine results pages.
 
-### `npm start`
+- ### Dark/Light Mode
+  Users can switch between dark and light mode according to their preferences.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ### Today Tasks
+  A section is dedicated to displaying tasks for the current day.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- ### Next Seven Days
+  Users can view tasks scheduled for the next seven days.
 
-### `npm test`
+- ### Task Priorities
+  Each task has a level of priority that is displayed with a specific color on the left side of the task element.
+  If the priority is none, there is no color or priority.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ### Responsive Design
+  The website is responsive and can be viewed on any screen size.
 
-### `npm run build`
+- ### Task Completion
+  Tasks can be marked as completed or non-complete, and completed tasks are displayed at the bottom of the task list.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ### Hosting
+  The website is deployed using Netlify, making it easy to share and access online.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ### Version Control
+  The project is managed using Git and GitHub, allowing for better collaboration with others and keeping track of changes made to the code.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ### Task Count
+  A counter next to each section link shows the number of tasks in that section (Home, Today, Next 7 Days).
+  
+- ### Task Search
+  A search input element allows users to search for specific tasks by name.
+  Debounce is used to reduce the number of calls to the search function.
+  
+- ### Assignee
+  Users can assign tasks to someone, and this is displayed on the UI.
+  
+- ### Modals
+  Custom modals are used instead of libraries like Sweetalert, and Promises are used for the delete modal.
+  
+- ### Past Date Highlighting
+  Tasks scheduled in the past are highlighted in red.
+  
+## Author
+-  Name: Ahmed Alawneh
+-  Email: ahmalawneh79@gmail.com
 
-### `npm run eject`
+## Contributor
+- Name: Faris Abuali
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
+  To use FTS-Task-To-Do, simply visit the deployed website. You can add, delete, and edit tasks as needed. 
+  The app is designed to be intuitive and easy to use.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgements
+  I am grateful to Foothill Technology Solutions for providing me with the opportunity to participate in this internship cycle, 
+  and for their support throughout the development of this project.
+  
+![foothil](https://user-images.githubusercontent.com/93674478/234090623-06e4155d-b2d0-425d-a953-1e9325bdbbb5.jpg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion
+  FTS-Task-To-Do is a straightforward and effective way to manage your tasks and stay organized.
+  It is ideal for students, professionals, or anyone looking to keep track of their to-do list.
+  Thank you for checking out My project!

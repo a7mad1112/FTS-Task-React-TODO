@@ -66,7 +66,8 @@ FTS-Task-To-Do comes with several helpful features, including:
 ## Acknowledgements
   I am grateful to Foothill Technology Solutions for providing me with the opportunity to participate in this internship cycle, 
   and for their support throughout the development of this project.
-  ![Uploading shopping-hup.jpg…]()
+
+
 
 ![foothil](https://user-images.githubusercontent.com/93674478/234090623-06e4155d-b2d0-425d-a953-1e9325bdbbb5.jpg)
 
@@ -75,3 +76,5 @@ FTS-Task-To-Do comes with several helpful features, including:
   FTS-Task-To-Do is a straightforward and effective way to manage your tasks and stay organized.
   It is ideal for students, professionals, or anyone looking to keep track of their to-do list.
   Thank you for checking out My project!
+
+![Uploading shopping-hup.jpg…]()
